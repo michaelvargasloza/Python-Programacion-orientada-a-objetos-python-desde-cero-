@@ -1,17 +1,23 @@
 #Envío de correos
 import smtplib
+from email.mime.text import MIMEText
 
-remitente = 'vargas_michael1993@yahoo.es'
-destinatario = 'michael_vargas_loza@yahoo.es'
-msg = 'Este es un correo enviado desde la consola de python.'
-
+smtp_ssl_host = '' #Salida
+smtp_ssl_port = #Puerto
 #Datos de usuario.
-username = 'vargas_michael1993@yahoo.es'
-password = ''
+username = '' #Usuario
+password = '' #Pass
+sender = '' #Remitente
+#Datos del receptor(es).
+targets = ['']
 
 #Enviado del correo
-server = smtplib.SMTP('smtp.mail.yahoo.com:587')
-server.starttls()
+msg = MIMEText('Hola mundo!')
+msg['Subject'] = ('Asunto.')
+msg['From'] = sender
+msg['To'] = ', '.join(targets)
+
+server = smtplib.SMTP_SSL(smtp_ssl_host, smtp_ssl_port)
 server.login(username, password)
-server.sendmail(remitente, destinatario, msg)
+server.sendmail(sender, targets, msg.as_string())
 server.quit()
